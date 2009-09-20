@@ -1,33 +1,19 @@
 package cn.mop4j.base.dao;
 
-import java.util.List;
-
 import cn.mop4j.base.vo.ValueObject;
 
-public class BaseDao implements IDao {
+public abstract class BaseDao implements IDao {
 
 	@Override
-	public void delete(ValueObject vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void delete(ValueObject vo) throws Exception;
 
 	@Override
-	public void save(ValueObject vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void save(ValueObject vo) throws Exception;
 
 	@Override
-	public void update(ValueObject vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void update(ValueObject vo) throws Exception;
 
 	@Override
-	public ValueObject query(String pk) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract ValueObject query(String pk) throws Exception;
 
 }

@@ -1,7 +1,5 @@
 package cn.mop4j.base.dao;
 
-import java.util.List;
-
 import cn.mop4j.base.vo.ValueObject;
 
 public interface IDao {
