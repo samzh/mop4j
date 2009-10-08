@@ -1,15 +1,20 @@
 package cn.mop4j.base.dao;
 
-import cn.mop4j.base.vo.ValueObject;
+import java.io.Serializable;
+import java.util.List;
 
-public interface IDao {
+import com.wideplay.warp.persist.Transactional;
+
+public interface IDao<T, PK extends Serializable> {
 	
-	void save(ValueObject vo) throws Exception;
+	@Transactional
+	T save(T vo) throws Exception;
 	
-	void update(ValueObject vo) throws Exception;
+	List<T> query() throws Exception;
 	
-	ValueObject query(String pk) throws Exception;
+	T find(PK id) throws Exception;
 	
-	void delete(ValueObject vo) throws Exception;
+	@Transactional
+	void delete(PK id) throws Exception;
 
 }
