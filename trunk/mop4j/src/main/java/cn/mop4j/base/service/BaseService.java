@@ -1,4 +1,4 @@
-package cn.mop4j.base.dao;
+package cn.mop4j.base.service;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,14 +9,14 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.wideplay.warp.persist.Transactional;
 
-public class BaseDao<T, PK extends Serializable> implements IDao<T, PK> {
+public class BaseService<T, PK extends Serializable> implements IService<T, PK> {
 
 	@Inject
 	Provider<EntityManager> emp;
 
 	private Class<T> persistentClass;
 
-	public BaseDao(Class<T> persistentClass) {
+	public BaseService(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
 	}
 
@@ -38,5 +38,4 @@ public class BaseDao<T, PK extends Serializable> implements IDao<T, PK> {
 	public List<T> query() throws Exception {
 		return emp.get().createQuery("from " + this.persistentClass.getSimpleName()).getResultList();
 	}
-
 }
