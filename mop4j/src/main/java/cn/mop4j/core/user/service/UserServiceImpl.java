@@ -9,11 +9,9 @@ import com.wideplay.warp.persist.dao.Finder;
 public class UserServiceImpl extends BaseService<BaseUser, String> implements IService<BaseUser, String> {
 
 	public UserServiceImpl(Class<BaseUser> persistentClass) {
-		super(persistentClass);
 	}
 	
 	public UserServiceImpl() {
-		super(BaseUser.class);
 	}
 
 	@Finder(query = "FROM User WHERE name = :name")
