@@ -2,7 +2,15 @@ package cn.mop4j.base.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
 /**
@@ -21,6 +29,9 @@ public class ValueObject implements IValueObject {
 	 * 
 	 * @return id;
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MUSER_ID")
+	@GenericGenerator(name = "MUSER_ID", strategy = "uuid")
 	public String getId() {
 		return id;
 	}
@@ -39,6 +50,9 @@ public class ValueObject implements IValueObject {
 	 * 
 	 * @return created 创建时间
 	 */
+	
+	@Column(name="created")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreated() {
 		return created;
 	}
@@ -58,6 +72,8 @@ public class ValueObject implements IValueObject {
 	 * 
 	 * @return updated 修改时间
 	 */
+	@Column(name="updated")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getUpdated() {
 		return updated;
 	}

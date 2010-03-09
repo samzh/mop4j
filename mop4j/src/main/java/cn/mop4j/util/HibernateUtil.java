@@ -3,9 +3,11 @@ package cn.mop4j.util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
+
+import cn.mop4j.core.user.vo.BaseUser;
 
 public class HibernateUtil {
 
@@ -14,8 +16,12 @@ public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
 
 	static {
+		log.info("Initializing Hibernate SesstionFactory.");
 		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
+			sessionFactory = new AnnotationConfiguration()
+			.addAnnotatedClass(BaseUser.class)
+			.configure().buildSessionFactory();
+			log.info("SessionFactory Initialization Succeed");
 		} catch (Throwable ex) {
 			log.error("Initial SessionFactory creation failed.", ex);
 			throw new ExceptionInInitializerError(ex);
@@ -30,7 +36,8 @@ public class HibernateUtil {
 	 * @return session Hibernate 当前线程
 	 * @throws HibernateException
 	 */
-	public static Session Session() throws HibernateException {
+	@SuppressWarnings("unchecked")
+	public static Session getSession() throws HibernateException {
 		Session s = (Session) session.get();
 		// Open a new Session, if this Thread has none yet
 		if (s == null) {
@@ -45,6 +52,7 @@ public class HibernateUtil {
 	 * 
 	 * @throws HibernateException
 	 */
+	@SuppressWarnings("unchecked")
 	public static void closeSession() throws HibernateException {
 		Session s = (Session) session.get();
 		session.set(null);

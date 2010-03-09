@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import junit.framework.TestCase;
-
 import cn.mop4j.base.vo.ValueObject;
 
 public class BaseDaoTest extends TestCase {

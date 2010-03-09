@@ -16,14 +16,13 @@ import cn.mop4j.base.vo.ValueObject;
 @Table(name = "M_USER")
 public class BaseUser extends ValueObject {
 
-	@Column(length = 128, nullable = false)
 	private String account;
-
-	@Column(length = 128, nullable = false)
+	
 	private String nickname;
 
 	private String password;
 
+	@Column(nullable = false, name="account")
 	public String getAccount() {
 		return account;
 	}
@@ -32,6 +31,7 @@ public class BaseUser extends ValueObject {
 		this.account = account;
 	}
 
+	@Column(nullable = false, name="nickname")
 	public String getNickname() {
 		return nickname;
 	}
@@ -40,6 +40,7 @@ public class BaseUser extends ValueObject {
 		this.nickname = nickname;
 	}
 
+	@Column(nullable = false, name="password")
 	public String getPassword() {
 		return password;
 	}
@@ -48,6 +49,7 @@ public class BaseUser extends ValueObject {
 		this.password = password;
 	}
 
+	@Column(name="email")
 	public String getEmail() {
 		return email;
 	}

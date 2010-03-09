@@ -1,11 +1,10 @@
 package cn.mop4j.core.user.service;
 
-import java.io.Serializable;
-
 import cn.mop4j.base.service.IService;
+import cn.mop4j.core.user.vo.BaseUser;
 
-public interface UserService<T, PK extends Serializable> extends IService<T, PK> {
+public interface UserService extends IService {
 
-	T findUserByName(String name);
+	public BaseUser findByAccount(String account);
 
 }

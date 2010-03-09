@@ -2,9 +2,13 @@ package cn.mop4j.base.dao;
 
 import java.util.Collection;
 
+import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
+
 import cn.mop4j.base.vo.ValueObject;
 import cn.mop4j.util.HibernateUtil;
 
+@Transactional
 public class HibernateBaseDao extends BaseDao {
 
 	public HibernateBaseDao(Class clazz) {
@@ -27,7 +31,16 @@ public class HibernateBaseDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public void save(ValueObject vo) throws Exception {
-		HibernateUtil.Session().save(vo);
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		try {
+			session.saveOrUpdate(vo);
+
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
 	}
 
 	/**
@@ -38,7 +51,7 @@ public class HibernateBaseDao extends BaseDao {
 	 * @throws Exceptoin
 	 */
 	public ValueObject find(String id) throws Exception {
-		return (ValueObject) HibernateUtil.Session().load(get_class(), id);
+		return (ValueObject) HibernateUtil.getSession().load(get_class(), id);
 	}
 
 	/**
@@ -57,10 +70,20 @@ public class HibernateBaseDao extends BaseDao {
 	 * @param id
 	 * @throws Exception
 	 */
+	@Transactional
 	public void remove(String id) throws Exception {
-		ValueObject vo = find(id);
-		if (vo != null)
-			HibernateUtil.Session().delete(vo);
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		try {
+			ValueObject vo = find(id);
+			if (vo != null)
+				session.delete(vo);
+			
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
 	}
 
 }
