@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+	<context:property-placeholder location="classpath:hibernate.properties"/>
+
+	<!-- Local C3P0 DataSource that works in any environment -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${hibernate.connection.driver_class}"/>
+		<property name="jdbcUrl" value="${hibernate.connection.url}"/>
+		<property name="user" value="${hibernate.connection.username}"/>
+		<property name="password" value="${hibernate.connection.password}"/>
+	</bean>
+
+	<!-- Transaction manager for a Hibernate DataSource -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="userDao" class="cn.mop4j.core.user.dao.UserDao">
+	</bean>
+	
+	<bean id="userService" class="cn.mop4j.core.user.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+	<!-- Hibernate SessionFactory configuration -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="baseAction" scope="prototype"
+        class="cn.mop4j.base.action.BaseAction">
+        <constructor-arg ref="userService" />
+    </bean>
+	
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	
+
+</beans>
