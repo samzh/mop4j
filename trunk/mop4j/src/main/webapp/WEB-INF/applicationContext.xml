@@ -39,7 +39,20 @@
 	
 	<bean id="baseAction" scope="prototype"
         class="cn.mop4j.base.action.BaseAction">
-        <constructor-arg ref="userService" />
+        <property name="userService" ref="userService" />
+    </bean>
+    
+    <bean id="homepageAction" scope="prototype" class="cn.mop4j.core.forum.HomepageAction">
+    	<property name="forumService" ref="forumService" />
+    </bean>
+    
+    <bean id="forumService" 
+        class="cn.mop4j.core.forum.service.impl.ForumServiceImpl">
+        <property name="forumDAO" ref="forumDAO" />
+    </bean>
+    
+      <bean id="forumDAO" 
+        class="cn.mop4j.core.forum.dao.impl.HibernateForumDAO">
     </bean>
 	
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->

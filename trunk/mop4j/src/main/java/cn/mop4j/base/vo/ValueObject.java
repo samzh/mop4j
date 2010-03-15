@@ -50,8 +50,8 @@ public class ValueObject implements IValueObject {
 	 * 
 	 * @return created 创建时间
 	 */
-	
-	@Column(name="created")
+
+	@Column(name = "created")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreated() {
 		return created;
@@ -72,7 +72,7 @@ public class ValueObject implements IValueObject {
 	 * 
 	 * @return updated 修改时间
 	 */
-	@Column(name="updated")
+	@Column(name = "updated")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getUpdated() {
 		return updated;

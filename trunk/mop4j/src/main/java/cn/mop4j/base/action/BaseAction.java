@@ -1,35 +1,41 @@
-/**
- * 
- */
 package cn.mop4j.base.action;
 
+import java.util.Collection;
+
+import cn.mop4j.base.vo.ValueObject;
+
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * @author Administrator
+ * @author Sam
  * 
  */
-public class BaseAction extends ActionSupport {
+public abstract class BaseAction extends ActionSupport implements Action {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1268857716512544533L;
-	
-	private String account;
 
-	public void setAccount(String account) {
-		this.account = account;
+	private Collection dataList;
+
+	private ValueObject vo;
+
+	public void setDataList(Collection dataList) {
+		this.dataList = dataList;
 	}
 
-	public String getAccount() {
-		return account;
+	public Collection getDataList() {
+		return dataList;
 	}
-	
-	public String doBegin() {
-		return SUCCESS;
+
+	public void setVo(ValueObject vo) {
+		this.vo = vo;
 	}
-	
-	
+
+	public ValueObject getVo() {
+		return vo;
+	}
 
 }
