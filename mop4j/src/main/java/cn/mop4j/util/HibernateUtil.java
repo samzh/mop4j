@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+import cn.mop4j.core.forum.vo.Topic;
 import cn.mop4j.core.user.vo.BaseUser;
 
 public class HibernateUtil {
@@ -20,6 +21,7 @@ public class HibernateUtil {
 		try {
 			sessionFactory = new AnnotationConfiguration()
 			.addAnnotatedClass(BaseUser.class)
+			.addAnnotatedClass(Topic.class)
 			.configure().buildSessionFactory();
 			log.info("SessionFactory Initialization Succeed");
 		} catch (Throwable ex) {

@@ -27,7 +27,7 @@ public class HibernateForumDAO extends HibernateBaseDao implements IForumDAO {
 
 		Session session = HibernateUtil.getSession();
 
-		Query query = session.createQuery("from " + this.get_class() + " vo order by vo.updated desc");
+		Query query = session.createQuery("from " + this.get_class().getName() + " vo order by vo.updated desc");
 		query.setFetchSize(20);
 		return query.list() == null ? new ArrayList() : query.list();
 	}

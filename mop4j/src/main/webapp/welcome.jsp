@@ -6,8 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Insert title here</title>
+
+<script type="text/javascript">
+function reloadLeft() {
+	//var urlParam = location.search;
+	var urlParam = location.search;
+	if (urlParam) {
+		if (urlParam.indexOf("refresh=true") >= 0) {
+			window.top.frames['contentleft'].location.reload();
+		}
+	}
+}
+
+</script>
 </head>
-<body>
+<body onload="reloadLeft()">
 <h2>快点左边的帖子！别愣着！！</h2>
 </body>
 </html>

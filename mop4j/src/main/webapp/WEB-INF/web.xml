@@ -22,15 +22,6 @@
 		<mime-type>text/xml</mime-type>
 	</mime-mapping>
 
-	<mime-mapping>
-		<extension>jad</extension>
-		<mime-type>text/vnd.sun.j2me.app-descriptor</mime-type>
-	</mime-mapping>
-
-	<mime-mapping>
-		<extension>jar</extension>
-		<mime-type>application/java-archive</mime-type>
-	</mime-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
@@ -73,6 +64,16 @@
             <param-value>WARN</param-value>  
         </init-param>  
     </filter>  
+    
+    <filter>
+    	<filter-name>struts2-cleanup</filter-name>
+    	<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+    </filter>
+    
+    <filter-mapping>
+    	<filter-name>struts2-cleanup</filter-name>
+    	<url-pattern>/*</url-pattern>
+    </filter-mapping>
     
     <filter-mapping>
     	<filter-name>UrlRewriteFilter</filter-name>

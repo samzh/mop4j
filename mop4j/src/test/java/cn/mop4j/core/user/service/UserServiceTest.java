@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import junit.framework.TestCase;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.mop4j.core.user.vo.BaseUser;
@@ -17,7 +16,7 @@ public class UserServiceTest extends TestCase {
 
 	protected void setUp() throws Exception {
 
-		ApplicationContext res = new ClassPathXmlApplicationContext("**/**/UserTestContext.xml");
+		new ClassPathXmlApplicationContext("**/**/UserTestContext.xml");
 		// userService = (UserService)res.getBean("userService");
 		super.setUp();
 	}

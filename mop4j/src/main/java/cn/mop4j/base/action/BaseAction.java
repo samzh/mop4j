@@ -18,9 +18,13 @@ public abstract class BaseAction extends ActionSupport implements Action {
 	 */
 	private static final long serialVersionUID = 1268857716512544533L;
 
-	private Collection dataList;
+	protected Collection dataList;
 
-	private ValueObject vo;
+	protected ValueObject vo;
+	
+	public BaseAction (ValueObject vo) {
+		this.vo = vo;
+	}
 
 	public void setDataList(Collection dataList) {
 		this.dataList = dataList;
