@@ -1,6 +1,7 @@
 package cn.mop4j.base.dao;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,7 @@ public class HibernateBaseDao extends BaseDao {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		try {
+			vo.setCreated(new Date());
 			session.saveOrUpdate(vo);
 
 			session.getTransaction().commit();

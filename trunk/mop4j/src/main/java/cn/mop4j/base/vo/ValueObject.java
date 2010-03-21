@@ -16,13 +16,13 @@ import org.hibernate.annotations.GenericGenerator;
 /**
  * VO类超类，拥有ValueObject的基本属性
  */
-public class ValueObject implements IValueObject {
+public abstract class ValueObject implements IValueObject {
 
-	private String id;
+	protected String id;
 
-	private Date created;
+	protected Date created;
 
-	private Date updated;
+	protected Date updated;
 
 	/**
 	 * 返回ID

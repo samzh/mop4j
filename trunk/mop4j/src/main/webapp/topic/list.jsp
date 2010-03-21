@@ -10,13 +10,14 @@
 </head>
 <body>
 <s:if test="dataList.size > 0">
-	<s:iterator value="dataList" status="dl">
-		<s:property value="dl.index" />, <s:property value="dl.title" />
+	<s:iterator value="dataList" id="vo" status="dl">
+		<s:property value="#dl.count" />,<s:property value="#vo.title" /> <br/>
 	</s:iterator>
 </s:if>
 <s:else>
 	<h2>目前没有任何帖子</h2>
-	<a href="<s:url value='/topic/new'/>" target="contentright">新建主题</a>
 </s:else>
+<br/>
+<a href="<s:url value='/topic/new'/>" target="contentright">新建主题</a>
 </body>
 </html>

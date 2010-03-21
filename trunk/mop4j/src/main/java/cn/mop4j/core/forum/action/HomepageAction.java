@@ -14,6 +14,10 @@ public class HomepageAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1779786653139487508L;
 
+	public HomepageAction() {
+		super(new Topic());
+	}
+
 	@Action(results = { @Result(name = "success", location = "/index.jsp"),
 			@Result(name = "input", location = "/begin.htm") }, value = "homepage")
 	public String doShowHomepage() {
@@ -28,6 +32,7 @@ public class HomepageAction extends BaseAction {
 	@Action(results = { @Result(name = "success", location = "/topic/list.jsp"),
 			@Result(name = "input", location = "/error.jsp") }, value = "/topic/list")
 	public String doShowTopic() {
+
 		this.setDataList(forumService.getTop20Topics());
 		return SUCCESS;
 	}
@@ -55,13 +60,13 @@ public class HomepageAction extends BaseAction {
 	}
 
 	@Action(results = { @Result(name = "success", location = "/topic/content.jsp"),
-			@Result(name = "input", location = "/error.jsp") }, value = "/new", params = { "key", "vo" })
+			@Result(name = "input", location = "/error.jsp") }, value = "/new")
 	public String doNew() {
 		return SUCCESS;
 	}
 
-	@Action(results = { @Result(name = "success", location = "/topic/content.jsp"),
-			@Result(name = "input", location = "/topic/content.jsp") }, value = "/save", params = { "key", "vo" })
+	@Action(results = { @Result(name = "success", location = "/welcome.jsp", params={"refresh", "true"}, type="redirect"),
+			@Result(name = "input", location = "/topic/content.jsp") }, value = "/save")
 	public String doSave() {
 		Topic topic = (Topic) getVo();
 		try {
